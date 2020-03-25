@@ -16,18 +16,23 @@ const ToDoInput = (prop: ToDoInputInterface) => {
 
     function handleInputSubmit(event: React.KeyboardEvent) {
        if (event.key === 'Enter') {
-           const newToDo: ToDoInterface = {
-               title: inputState,
-               id: shortid.generate(),
-               isCompleted: false,
-               isEdited: false
-           };
-           prop.handleCreate(newToDo);
-           if (inputRef && inputRef.current) {
-               inputRef.current.value = '';
+           if (!inputState.length) {
+               alert("You cannot add an empty task!");
+           } else {
+               const newToDo: ToDoInterface = {
+                   title: inputState,
+                   id: shortid.generate(),
+                   isCompleted: false,
+                   isEdited: false
+               };
+               prop.handleCreate(newToDo);
+               setInputState("");
+               if (inputRef && inputRef.current) {
+                   inputRef.current.value = '';
+               }
            }
        }
-    }
+       }
 
     return (
         <div className="toDoInput">
@@ -37,7 +42,7 @@ const ToDoInput = (prop: ToDoInputInterface) => {
                    onKeyPress={event => handleInputSubmit(event)}
                    ref={inputRef}/>
         </div>
-    );
-};
+    )
+    };
 
 export default ToDoInput;

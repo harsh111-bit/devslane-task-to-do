@@ -57,12 +57,10 @@ const ToDoApp = () => {
         const firebaseRef = fireDB.database().ref('tasks');
         firebaseRef.push(todo);
         newToDosState.push(todo);
-        console.log(newToDosState);
         setToDos(newToDosState);
     }
 
     function handleRemove(toDo: ToDoInterface, id: string) {
-        console.log(toDos, toDosFromFirebase);
         const newToDosState: ToDoInterface[] = toDos.filter((toDo: ToDoInterface) => toDo.id !== id);
         // @ts-ignore
         toDosFromFirebase.forEach((t) => {
@@ -76,15 +74,20 @@ const ToDoApp = () => {
 
     function handleUpdate(event: React.ChangeEvent<HTMLInputElement>, id: string) {
     const newToDosState: ToDoInterface[] = [...toDos];
-    newToDosState.find((toDo: ToDoInterface) => toDo.id === id)!.title = event.target.value;
-    // @ts-ignore
+    if (!event.target.value.length) {
+        alert("You cannot leave a task empty.")
+    }
+    else {
+        newToDosState.find((toDo: ToDoInterface) => toDo.id === id)!.title = event.target.value;
+        // @ts-ignore
         toDosFromFirebase.forEach((t) => {
             if (t.val().id === id) {
                 const firebaseRef = fireDB.database().ref(`/tasks/${t.key}`);
                 firebaseRef.update({ title: event.target.value, isEdited: true}).catch();
             }
         });
-    setToDos(newToDosState);
+        setToDos(newToDosState);
+    }
     }
 
     function handleComplete(toDo: ToDoInterface, id: string) {
@@ -131,9 +134,9 @@ const ToDoApp = () => {
                                </div>
                 </div>
                 <div className="links">
-                <a onClick={() => showAllToDos()}>All</a>
-                <a onClick={() => showAllActiveToDos()}>Active</a>
-                <a onClick={() => showAllCompletedToDos()}>Completed</a>
+                <button onClick={() => showAllToDos()}>All</button>
+                <button onClick={() => showAllActiveToDos()}>Active</button>
+                <button onClick={() => showAllCompletedToDos()}>Completed</button>
                 </div>
                 </>
                        }

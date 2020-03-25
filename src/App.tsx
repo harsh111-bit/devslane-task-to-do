@@ -117,31 +117,32 @@ const ToDoApp = () => {
         setToDos(newToDo);
     }
 
+
     return (
-        <div className="toDoAppList">
-            {isLoading ? <Loader type="Circles" color="#2BAD60" /> :
-                <>
-                <div>
-                    <ToDoList handleTodoUpdate={handleUpdate}
-                              handleTodoRemove={handleRemove}
-                              handleTodoComplete={handleComplete}
-                              toDos={toDos}/>
+            <div className="toDoAppList">
+                {isLoading ? <Loader type="Circles" color="#2BAD60" /> :
+                    <>
+                        <div>
+                            <ToDoList handleTodoUpdate={handleUpdate}
+                                      handleTodoRemove={handleRemove}
+                                      handleTodoComplete={handleComplete}
+                                      toDos={toDos}/>
 
-                    <ToDoInput toDos={toDos}
-                               handleCreate={handleCreate}/>
-                               <div className="remaining">
-                                   <p>Remaining Tasks: ({toDosRemaining})</p>
-                               </div>
-                </div>
-                <div className="links">
-                <button onClick={() => showAllToDos()}>All</button>
-                <button onClick={() => showAllActiveToDos()}>Active</button>
-                <button onClick={() => showAllCompletedToDos()}>Completed</button>
-                </div>
-                </>
-                       }
+                            <ToDoInput toDos={toDos}
+                                       handleCreate={handleCreate}/>
+                            <div className="remaining">
+                                <p>Remaining Tasks: ({toDosRemaining})</p>
+                            </div>
+                        </div>
+                        <div className="links">
+                            <a onClick={() => showAllToDos()}>All</a>
+                            <a onClick={() => showAllActiveToDos()}>Active</a>
+                            <a onClick={() => showAllCompletedToDos()}>Completed</a>
+                        </div>
+                    </>
+                }
+            </div>
 
-        </div>
     );
 };
 

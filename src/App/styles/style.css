@@ -118,6 +118,7 @@ body h1 {
   border: 1px solid darkgreen;
   transition: .25s all ease-in-out;
   margin-right: 16px;
+  cursor: pointer;
 }
 
 .unchecked:hover {
@@ -153,7 +154,7 @@ body h1 {
   margin-left: 40px;
 }
 
-.links button {
+.links a {
   background-color: #c5ddb8;
   box-shadow: 0 5px 0 #77DD77;
   color: white;
@@ -175,4 +176,5 @@ body h1 {
 .remaining p {
   color: forestgreen;
 }
+
 
